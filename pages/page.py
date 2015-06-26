@@ -45,7 +45,7 @@ class Page(object):
             time.sleep(1)
             count += 1
             if count == self.timeout:
-                raise Exception(*locator + ' has not loaded')
+                raise Exception("{} is not visible".format(*locator))
 
     def wait_for_element_visible(self, *locator):
         """Wait for the element at the specified locator to be visible in the browser."""
@@ -54,7 +54,7 @@ class Page(object):
             time.sleep(1)
             count += 1
             if count == self.timeout:
-                raise Exception(*locator + " is not visible")
+                raise Exception("{} is not visible".format(*locator))
 
     def wait_for_element_not_present(self, *locator):
         """Wait for the element at the specified locator to be not present in the DOM."""
