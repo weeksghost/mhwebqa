@@ -120,9 +120,9 @@ class Page(object):
         """Return a list of elements at the specified locator."""
         return self._selenium_root.find_elements(*locator)
 
-    def force_wait(self):
+    def force_wait(self, wait_time):
         try:
-            time.sleep(5)
+            time.sleep(int(wait_time))
         except TimeoutException:
             Assert.fail(TimeoutException)
         finally:

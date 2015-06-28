@@ -23,5 +23,5 @@ class HomePage(Base):
         search_box = self.find_element(*self._search_locator)
         search_box.submit()
 
-    def result_output(self):
-        self.selenium.find_element(*self._results_locator)
+    def is_result_output_present(self):
+        return self.is_element_present(*self._results_locator)
