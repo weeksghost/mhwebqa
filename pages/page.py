@@ -24,8 +24,8 @@ class Page(object):
     def refresh(self):
         self.selenium.refresh()
 
-    def open(self):
-        self.selenium.get(self.base_url)
+    def open(self, slug):
+        self.selenium.get(self.base_url + slug)
         self.selenium.maximize_window()
 
     @property
