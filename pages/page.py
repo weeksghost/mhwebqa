@@ -109,6 +109,18 @@ class Page(object):
         if option_found is False:
             raise Exception("Option '" + value + "' was not found, thus not selectable.")
 
+    def dropdown_menu(self, locator):
+        dropdown = self.selenium.find_element(*locator)
+        option_found = False
+        all_options = dropdown.find_elements_by_css_selector('a')
+        for option in all_options:
+            if option.get_attribute('href'):
+                option_found = True
+                option.click()
+                break
+        if option_found is False:
+            raise Exception("Option was not found, thus not selectable.")
+
     def get_url_current_page(self):
         return(self.selenium.current_url)
 
