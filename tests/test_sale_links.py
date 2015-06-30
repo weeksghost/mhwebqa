@@ -10,7 +10,7 @@ class TestSaleLinks:
     def test_left_dropdown_links(self, mozwebqa):
         sale_page = SalePage(mozwebqa)
         response = requests.get(mozwebqa.base_url + '/default/sale-discount')
-        soup = BeautifulSoup(response.text)
+        soup = BeautifulSoup(response.content)
         sale_nav_items = soup.find('ul', class_='sale-category-nav')
         for link in sale_nav_items.select('li a[href]'):
             assert sale_page.get_response_code(
