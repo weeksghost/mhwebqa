@@ -14,4 +14,4 @@ class TestGoogleSearch(BaseTest):
         home_page.search_text(input_text)
         home_page.search_box_submit()
         home_page.force_wait(1)
-        assert home_page.is_result_output_present(), 'Locator not working.'
+        assert home_page.is_result_output_present(), 'No results found.'
