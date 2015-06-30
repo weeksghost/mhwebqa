@@ -1,4 +1,7 @@
 from selenium.webdriver.common.by import By
+import requests
+from urlparse import urlparse
+from bs4 import BeautifulSoup
 from pages.base import Base
 
 
@@ -6,6 +9,12 @@ class SalePage(Base):
 
     def go_to_page(self):
         self.open('/default/sale-discount')
+
+    def window_max(self):
+        self.selenium.maximize_window()
+
+    def resize_window(self, width, height):
+        self.selenium.set_window_size(width, height)
 
     _left_dropdown_list = (By.CLASS_NAME, 'sale-subcategory-nav')
 
@@ -22,13 +31,3 @@ class SalePage(Base):
 
     def drop_down_two(self):
         self.selenium.find_element(*self._drop_down_two).click()
-
-    def get_left_dropdown_links(self):
-        left_items = self.selenium.find_elements(*self._left_dropdown_list)
-        count = 0
-        for item in left_items:
-            count += 1
-        while count:
-            sale_categories = item.find_element_by_css_selector('a')
-            links = sale_categories.get_attribute('href')
-            return links

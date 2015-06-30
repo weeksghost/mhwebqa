@@ -3,6 +3,8 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import ElementNotVisibleException
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
+import requests
+from requests.exceptions import Timeout
 from unittestzero import Assert
 import time
 
@@ -140,9 +142,21 @@ class Page(object):
         finally:
             self.selenium.implicitly_wait(self.testsetup.default_implicit_wait)
 
-class PageRegion(Page):
-    """Base class for a page region (generally an element in a list of elements)."""
+    def wait_for_ajax(self):
+        count = 0
+        while count < self.timeout:
+            time.sleep(1)
+            count += 1
+            if self.selenium.execute_script("return jQuery.active == 0"):
+                return
+        raise Exception("Wait for AJAX timed out after %s seconds" % count)
 
-    def __init__(self, testsetup, element):
-        self._root_element = element
-        Page.__init__(self, testsetup)
+    def get_response_code(self, url):
+        # return the response status
+        # this sets max_retries to 5
+        requests.adapters.DEFAULT_RETRIES = 10
+        try:
+            r = requests.get(url, verify=False, allow_redirects=True, timeout=self.timeout)
+            return r.status_code
+        except Timeout:
+            return 408
