@@ -1,7 +1,4 @@
 from selenium.webdriver.common.by import By
-import requests
-from urlparse import urlparse
-from bs4 import BeautifulSoup
 from pages.base import Base
 
 
@@ -9,6 +6,9 @@ class SalePage(Base):
 
     def go_to_page(self):
         self.open('/default/sale-discount')
+
+    def new_webdriver(self, url):
+        self.selenium.get(self.base_url + url)
 
     def window_max(self):
         self.selenium.maximize_window()
