@@ -94,7 +94,7 @@ def testSpecifyingFirefoxProfileAndOverridingPreferences(testdir, webserver):
 def testAddingFirefoxExtension(testdir, webserver):
     """Test that a firefox extension can be added when starting firefox."""
     import os
-    path_to_extensions_folder = os.path.join(os.path.split(os.path.dirname(__file__))[0], 'testing')
+    path_to_extensions_folder = os.path.join(os.path.split(os.path.dirname(__file__))[0], 'tests')
     extension = os.path.join(path_to_extensions_folder, 'empty.xpi')
     file_test = testdir.makepyfile("""
         import time
