@@ -16,6 +16,9 @@ class SalePage(Base):
     def resize_window(self, width, height):
         self.selenium.set_window_size(width, height)
 
+    def scroll_to_section(self, pos):
+        self.selenium.execute_script('window.scrollTo({}, document.body.scrollHeight);'.format(pos))
+
     _left_dropdown_list = (By.CLASS_NAME, 'sale-subcategory-nav')
 
     _left_dropdown_elements = (By.CSS_SELECTOR, 'body > div.wrapper > div > div > div.row.row-sale-content.row-two-column > div.row-content-secondary')

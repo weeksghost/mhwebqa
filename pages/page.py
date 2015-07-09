@@ -28,7 +28,6 @@ class Page(object):
 
     def open(self, slug):
         self.selenium.get(self.base_url + slug)
-        self.selenium.maximize_window()
 
     @property
     def page_title(self):
